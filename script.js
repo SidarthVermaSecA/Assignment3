@@ -1,4 +1,4 @@
-const quizData = [
+const quizData = [  //starting by putting all the questions in an object
     {
       question: "What is the full form of HTML?",
       options: ["Hyper Text Markdown Language", "Hyper thinking Markup Language", "Hyper Talking Mixed Language", "Hyper Text Markup Language"],
@@ -40,7 +40,9 @@ const quizData = [
         answer: "Earth"
       },
   ];
-  
+
+//getting all the required elements from html structure
+
 const questionElement = document.getElementById("question");
 const options = document.getElementById("options");
 const submitBtn = document.getElementById("submit");
@@ -48,12 +50,13 @@ const progressBar = document.getElementById("progress");
 const scoreCount = document.getElementById("score");
 const container = document.getElementsByClassName("container");
 
+//initializing question counter and score for later operations
 let currentQuestion = 0;
 let score = 0;
 
 function showQuestion() {
   const question = quizData[currentQuestion];
-  questionElement.innerText = [currentQuestion.valueOf()+1] + ". " + question.question  ;
+  questionElement.innerText = [currentQuestion.valueOf()+1] + ". " + question.question  ;  //giving serial number to the questions
 
   options.innerHTML = "";
   question.options.forEach(option => {
@@ -64,7 +67,7 @@ function showQuestion() {
   });
 }
 
-function selectAnswer(selectedOption) {
+function selectAnswer(selectedOption) { //checking if the option targeted (clicked) is correct or not, if it is, adding it to the score
   const selectedButton = selectedOption.target;
   const answer = quizData[currentQuestion].answer;
 
@@ -74,7 +77,7 @@ function selectAnswer(selectedOption) {
   }
 
   currentQuestion++;
-  progressBar.setAttribute("value",currentQuestion.valueOf());
+  progressBar.setAttribute("value",currentQuestion.valueOf()); //progressing the value of progress bar to match with number of questions left
 
   if (currentQuestion < quizData.length) {
     showQuestion();
@@ -84,10 +87,10 @@ function selectAnswer(selectedOption) {
 }
 
 function showResult() {
-  submitBtn.style.visibility = "visible";
+  submitBtn.style.visibility = "visible"; //showing submit button after answering the last question
   myQuiz.innerHTML = `
     <h1>Quiz Completed!</h1>
-    <p style="text-align:center;  text-decoration: underline;">Your score: ${score}/${quizData.length}</p>
+    <p style="text-align:center;  text-decoration: underline;">Your score: ${score}/${quizData.length}</p>  //displaying score
   `;
 }
  
