@@ -42,9 +42,11 @@ const quizData = [
   ];
   
 const questionElement = document.getElementById("question");
-const optionsElement = document.getElementById("options");
-const submitButton = document.getElementById("submit");
+const options = document.getElementById("options");
+const submitBtn = document.getElementById("submit");
 const progressBar = document.getElementById("progress");
+const scoreCount = document.getElementById("score");
+const container = document.getElementsByClassName("container");
 
 let currentQuestion = 0;
 let score = 0;
@@ -53,37 +55,41 @@ function showQuestion() {
   const question = quizData[currentQuestion];
   questionElement.innerText = [currentQuestion.valueOf()+1] + ". " + question.question  ;
 
-  optionsElement.innerHTML = "";
+  options.innerHTML = "";
   question.options.forEach(option => {
     const button = document.createElement("button");
     button.innerText = option;
-    optionsElement.appendChild(button);
+    options.appendChild(button);
     button.addEventListener("click", selectAnswer);
   });
 }
 
-function selectAnswer(e) {
-  const selectedButton = e.target;
+function selectAnswer(selectedOption) {
+  const selectedButton = selectedOption.target;
   const answer = quizData[currentQuestion].answer;
 
   if (selectedButton.innerText === answer) {
     score++;
+    scoreCount.innerText = score + "/8";
   }
 
-
   currentQuestion++;
+  progressBar.setAttribute("value",currentQuestion.valueOf());
+
   if (currentQuestion < quizData.length) {
     showQuestion();
-  } else {
+  } if (currentQuestion == 8){
     showResult();
   }
 }
 
 function showResult() {
-  quiz.innerHTML = `
+  submitBtn.style.visibility = "visible";
+  myQuiz.innerHTML = `
     <h1>Quiz Completed!</h1>
-    <p>Your score: ${score}/${quizData.length}</p>
+    <p style="text-align:center;  text-decoration: underline;">Your score: ${score}/${quizData.length}</p>
   `;
 }
-
+ 
 showQuestion()
+  

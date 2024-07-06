@@ -5,14 +5,16 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <progress max="8" value="5" id="progress"></progress>
+  <video id="background-video" autoplay muted loop>
+    <soucre src="bgvideo.mp4" type="video/mp4">
+  </video>
+  <div class="container" id="myQuiz">
+    <progress max="8" value="0" id="progress"></progress>
     <p >Score: <span id="score"></span></p>
     <div id="question"></div>
     <div id="options"></div>
     <button id="submit">Submit</button>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
